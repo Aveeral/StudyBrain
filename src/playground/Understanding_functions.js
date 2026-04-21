@@ -1,7 +1,8 @@
 // BLOCK 1: CREATING CONSTRUCTOR FUNCTIONS
 const createDocument = (name,courseId,ownerId,sizeInBytes) => {
    
-   const document = {id: "doc_" + Date.now(),
+   const document = {
+    id: "doc_" + Date.now(),
     name,
     courseId,
     ownerId,
@@ -20,49 +21,75 @@ const createDocument = (name,courseId,ownerId,sizeInBytes) => {
 
 const createUser = (name,email,plan = "free") => {
    
-   const document = {id: "doc_" + Date.now(),
+   const user= {
     id: "user_" + Date.now(),
     name,
     email,
     plan,
     isVerified: false,
-    createdAt: new Date().toISOString
+    createdAt: new Date().toISOString()
    };
 
-   return document;
+   return user;
 
 }
 
 const createCourse = (name,subject,ownerId) => {
    
-   const document = {id: "doc_" + Date.now(),
+   const course = {
     id: "course_" + Date.now(),
     name,
     subject,
     ownerId,
     documentCount: 0,
-    createdAt: new Date().toISOString
+    createdAt: new Date().toISOString()
    };
 
-   return document;
+   return course;
 
 }
 
 const createChunk = (text,chunkIndex,documentId) => {
    
-   const document = {id: "doc_" + Date.now(),
-    id: "chunk_" + Date.now() + " " + chunkIndex,
+   const chunk = {
+    id: "chunk_" + Date.now() + "_" + chunkIndex,
     text,
     chunkIndex,
     documentId,
-    wordCount: text.split().length,
+    wordCount: text.split(" ").length,
     isEmbedded: false,
     embeddedAt: null
    };
 
-   return document;
+   return chunk;
 
 }
+
+
+// BLOCK 2: CREATING VALIDATION FUNCTIONS
+
+const validateDocumentName = (docName) => {
+       
+   const type = typeof docName;
+   const length = docName.length;
+   const ending = (docName.endsWith(".pdf") || docName.endsWith(".txt"));
+   if (length<=200 && length>=3 && type === "string" &&  ending) {
+         
+      return {valid: true}
+   }
+   else{
+      return {
+         valid: false,
+         reason: "issue with length(btw 3 and 200) ending(.pdf or .txt) or datatype of docname"      
+      }
+   }
+   return 
+
+}
+
+
+
+
 
 
 
