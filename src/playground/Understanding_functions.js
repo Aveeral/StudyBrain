@@ -279,8 +279,38 @@ const canDeleteDocument = (user,doc)  => {
    }
 }
 
-// BLOCK 5: 
+// BLOCK 5: STATUS AND LABEL UTILITIES
 
+const getStatusMessage = (processingStatus) => {
+   switch (processingStatus) {
+      case "pending": return "Your document is queued for processing"
+         
+      case "processing": return "Your document is currently being indexed"
+
+      case "done": return "Your document is ready to search"
+
+      case "failed": return "Processing failed — please try uploading again"
+
+   
+      default: return "Unknown status"
+         
+   }
+}
+
+const formatBytes = (bytes) => {
+   if(bytes<1000){
+      return `${bytes} B`
+   }
+   if(bytes<1000000){
+      return `${(bytes/1000).toFixed(1)} KB`
+   }
+   else{
+      return `${(bytes/1000000).toFixed(1)} MB`
+   }
+
+}
+
+const 
 
 
 
