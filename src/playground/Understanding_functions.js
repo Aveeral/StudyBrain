@@ -215,11 +215,71 @@ const ingestText = (rawText,documentId) => {
 }
 
 
+//console.log(ingestText("Your system converts that question into an embedding — a list of 1500 numbers representing what that question meammjngjkhfkhgkgkgrjgrbbsvbsvbsvbmsbs jdks skd vjvkdnfbg“A nation is not just a piece of land on a map — it is the feeling in our hearts that says, ‘This is my home.Good morning respected teachers and my dear friends,My name is Aveeral, and today I am here to speak about Nationalism.Nationalism is the love, loyalty, and devotion we feel towards our nation. It is the pride we experience when our flag is hoisted high, when our soldiers protect our borders, and when our athletes represent us on the world stage. But nationalism is not just about celebrating achievements — it is also about responsibility.True nationalism means respecting our country’s values, culture, and diversity. It means following rules, helping fellow citizens, protecting public property, and working honestly for the progress of our nation. It is not about thinking our country is perfect; it is about believing in its potential and contributing to make it better.In a country as diverse as India, with different languages, religions, and traditions, nationalism is the force that unites us as one. It reminds us that despite our differences, we share one identity — we are Indians.Let us practice nationalism not just in words, but through our actions every",19486768))
 
+// BLOCK 4: ACCESS CONTROL
 
+const canUpload = (user,currentDocCount) => {
+   if(user.plan === "free"){
+      if(currentDocCount>=5){
+         return {
+            allowed: false,
+            reason: "Upload limit reached for free plan"
+         }
+      }
+        else{
+         return {
+            allowed: true
+         }
+      }
+      }
 
-console.log(ingestText("Your system converts that question into an embedding — a list of 1500 numbers representing what that question meammjngjkhfkhgkgkgrjgrbbsvbsvbsvbmsbs jdks skd vjvkdnfbg“A nation is not just a piece of land on a map — it is the feeling in our hearts that says, ‘This is my home.Good morning respected teachers and my dear friends,My name is Aveeral, and today I am here to speak about Nationalism.Nationalism is the love, loyalty, and devotion we feel towards our nation. It is the pride we experience when our flag is hoisted high, when our soldiers protect our borders, and when our athletes represent us on the world stage. But nationalism is not just about celebrating achievements — it is also about responsibility.True nationalism means respecting our country’s values, culture, and diversity. It means following rules, helping fellow citizens, protecting public property, and working honestly for the progress of our nation. It is not about thinking our country is perfect; it is about believing in its potential and contributing to make it better.In a country as diverse as India, with different languages, religions, and traditions, nationalism is the force that unites us as one. It reminds us that despite our differences, we share one identity — we are Indians.Let us practice nationalism not just in words, but through our actions every",19486768))
+   else{
+      if(currentDocCount>=50){
+         return {
+            allowed: false,
+            reason: "Upload limit reached for pro plan"
+         }
+      }
+      else{
+         return{allowed: true}
+      }
+   }
+         
+   }
 
+const canAccessDocument = (user,doc) => {
+   if(user.id === doc.ownerId){
+      return{allowed: true}
+   }
+   else{
+      return{
+         allowed: false,
+         reason: "You do not own this document"
+      }
+   }
+}
+
+const canDeleteDocument = (user,doc)  => {
+   const owns =  canAccessDocument(user,doc)
+   if(!owns.allowed){
+      return {
+         allowed: false,
+         reason: "You do not own this document"
+      }
+   }
+   if(doc.processingStatus === "processing"){
+      return{
+         allowed:false,
+         reason: "The document is still being processed"
+      }
+   }
+   return{
+      allowed: true
+   }
+}
+
+// BLOCK 5: 
 
 
 
