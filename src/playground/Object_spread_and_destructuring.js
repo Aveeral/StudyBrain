@@ -333,27 +333,34 @@ const buildDocumentResponse = (user,doc,chunks) => {
 const doc = { name: "notes.pdf", courseId: "bio101", isProcessed: false };
 
 const updateProcessingStatus  = (doc,newStatus)  => {
-   const newDoc = {...doc}
-   const {processingStatus} = newDoc 
-   processingStatus = newStatus
+   const newDoc = {...doc, processingStatus: newStatus}
    return newDoc
 } 
 
 const markDocumentDone = (doc) => {
-   const newDoc = {...doc};
-   let {processingStatus,isProcessed,processedAt} = {newDoc}
-   processingStatus = "done";
-   isProcessed = true;
-   processedAt = new Date().toISOString();
-   return newDoc
+   const newDoc = {...doc, processingStatus: "done",
+   isProcessed: true,
+   processedAt: new Date().toISOString()};
+   return newDoc;
 
 }
 
 const attachExtraMetadata = (doc,pageCount,wordCount) => {
-   const newDoc = {...doc,pageCount,wordCount}
-   return newDoc
+   const newDoc = {...doc,pageCount,wordCount};
+   return newDoc;
 }
 
-console.log(markDocumentDone(doc))
+const upgradeUser = (user) => {
+   const newUser = {...user,plan: "pro",upgradedAt: new Date().toISOString()};
+   return newUser;
+}
+const downgradeUser = (user) => {
+   const newUser = {...user,plan: "free",downgradedAt: new Date().toISOString()};
+   return newUser;
+}
+
+// Block 2: Destructuring
+
+
 
 
