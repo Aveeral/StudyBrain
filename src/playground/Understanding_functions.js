@@ -310,7 +310,20 @@ const formatBytes = (bytes) => {
 
 }
 
-const 
+const buildDocumentResponse = (user,doc,chunks) => {
+   return {
+  message: "Document uploaded successfully",
+  document: {
+    id: doc.id,
+    name: doc.name,
+    size: formatBytes(doc.sizeInBytes),   // use your function
+    status: getStatusMessage(doc.processingStatus),  // use your function
+    chunkCount: chunks.length,
+    uploadedAt: doc.uploadedAt
+  },
+  owner: user.name
+}
+}
 
 
 
