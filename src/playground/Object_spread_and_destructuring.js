@@ -361,6 +361,55 @@ const downgradeUser = (user) => {
 
 // Block 2: Destructuring
 
+const describeDocument = ({name: documentName,courseId,processingStatus}) => {
+   
+   return `${documentName} in ${courseId} - ${processingStatus}`;
+}
 
+const describeUser = ({name: userName, plan}) => {
+   
+   return `${userName} on ${plan} plan`
+}
 
+const result = {
+  score: 0.92,
+  chunk: {
+    text: "Mitochondria are the powerhouse...",
+    wordCount: 47
+  },
+  document: {
+    name: "Biology Notes.pdf",
+    courseId: "bio101"
+  }
+};
 
+const {score, chunk: {text: chunktext},document: {name: documentName}} = result;
+
+// real endpoint simulation 
+
+const req = {
+  body: {
+    name: "Biology Notes.pdf",
+    courseId: "bio101",
+    sizeInBytes: 204800
+  },
+  user: {
+    id: "user_001",
+    plan: "free"
+  }
+};
+
+const handleUpload = (req) => {
+   const {name: documentName,courseId,sizeInBytes} = req.body;
+   const {id: userId,plan} = req.user;
+
+   const upload = canUpload(req.user,currentDocCount = 0);
+   if(!upload.allowed){
+      return upload.reason;
+   }
+
+   const doc = createDocument(documentName,courseId,userId,sizeInBytes);
+
+   return buildDocumentResponse({name: "AVEERAL JAIN",id: 10175657},doc,[]);
+
+}
