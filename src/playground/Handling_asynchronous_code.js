@@ -92,5 +92,18 @@ async function getMultipleDocuments(ids){
     console.log(newDoc)
 }
 
-getMultipleDocuments(["doc_757839","doc_6583"]);
+
+// fetch and real api call
+async function getPublicData() {
+ 
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts/error");
+ 
+   if(!response.ok){
+    throw new Error(`HTTP error: ${response.status}`);
+  }
+  const data = await response.json();
+  console.log(data);
+}
+getPublicData()
+
 
