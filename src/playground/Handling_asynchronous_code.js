@@ -94,6 +94,7 @@ async function getMultipleDocuments(ids){
 
 
 // fetch and real api call
+/*
 async function getPublicData() {
   try{
   const response = await fetch("https://jsonplaceholder.typicode.com/posts/error");
@@ -107,31 +108,37 @@ async function getPublicData() {
     console.log(error.message);
 }
 }
-
-
-
-/*
-function randomTask() {
-    return new Promise( (resolve,reject) => {
-    const num = Math.floor(Math.random()*10);
-    if(num<=4){
-        resolve("Success")
-    }
-    else{
-        reject("Failed")
-    }
-    }
-    )
-}
-
-
-randomTask().then((data) => {
-    console.log(data)
-}).catch((error) => {
-    console.log(error)
-})
 */
 
-async function randomTask() {
-    
+async function getPublicData() {
+    try{
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+    if(!response.ok){
+        throw new Error(`HTTP ERROR: ${response.status}`)
+    }
+    const data = await response.json()
+    console.log(data)
+    }catch(error){
+        console.log(error)
+    }
 }
+
+
+async function fetchMultiplePromise() {
+   const ids = [1,2,3,4,5];
+   const  responses = await  Promise.all(ids.map((id) => fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)));
+   const data = await Promise.all(responses.map((res) => res.json()))
+   console.log(data)
+}
+
+
+
+
+
+
+
+
+
+
+
+
