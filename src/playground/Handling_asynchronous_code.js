@@ -131,6 +131,36 @@ async function fetchMultiplePromise() {
    console.log(data)
 }
 
+// use jsonplaceholder as a stand-in — just to practice the fetch pattern
+// pretend the response IS an embedding
+async function simulateOpenAIEmbedding(text) {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+  if (!response.ok) throw new Error(`API error: ${response.status}`);
+  const data = await response.json();
+  // return a fake embedding using the post id as seed
+  return Array.from({ length: 5 }, (_, i) => data.id * (i + 1) * 0.1);
+}
+
+// Simulating Full Ingestion Pipeline
+
+const chunkText = (rawText,chunkSize=500)  => {
+   rawText = sanitizeText(rawText);
+   const words = rawText.split(" ");
+   
+   
+   const chunks = [];
+   
+   for(let i=0;i<words.length;i= i+chunkSize){
+      
+      chunks.push(words.slice(i,i+chunkSize).join(" "));
+      
+   }
+   return chunks
+}
+
+ async function ingestDocument(rawText,documentId){
+        
+ }
 
 
 
