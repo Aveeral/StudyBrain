@@ -141,6 +141,9 @@ async function simulateOpenAIEmbedding(text) {
   return Array.from({ length: 5 }, (_, i) => data.id * (i + 1) * 0.1);
 }
 
+
+
+
 // Simulating Full Ingestion Pipeline
 
 const chunkText = (rawText,chunkSize=500)  => {
@@ -158,9 +161,59 @@ const chunkText = (rawText,chunkSize=500)  => {
    return chunks
 }
 
- async function ingestDocument(rawText,documentId){
-        
- }
+const createChunk = (text,chunkIndex,documentId) => {
+   
+   const chunk = {
+    id: "chunk_" + Date.now() + "_" + chunkIndex,
+    text,
+    chunkIndex,
+    documentId,
+    wordCount: text.split(" ").length,
+    isEmbedded: false,
+    embeddedAt: null
+   };
+
+   return chunk;
+
+}
+const sanitizeText = (rawText) => {
+   return rawText.trim().replace(/\s+/g," ");
+}
+/*
+async function ingestDocument(rawText, documentId) {
+  const chunks = chunkText(rawText, 100);
+  console.log(`Starting ingestion — ${chunks.length} chunks to embed`);
+
+  const embeddings = await Promise.all(
+    chunks.map(chunk => simulateOpenAIEmbedding(chunk))
+  );
+
+  const chunkObjects = chunks.map((text, i) => createChunk(text, i, documentId));
+
+  const embeddedChunks = chunkObjects.map((chunk, i) => ({
+    ...chunk,
+    embedding: embeddings[i],
+    isEmbedded: true,
+    embeddedAt: new Date().toISOString()
+  }));
+
+  embeddedChunks.forEach((chunk, i) => {
+    console.log(`Chunk ${i + 1} of ${embeddedChunks.length} embedded — ${chunk.wordCount} words`);
+  });
+
+  return {
+    documentId,
+    chunks: embeddedChunks,
+    totalChunks: embeddedChunks.length,
+    totalWords: rawText.split(" ").length
+  };
+}
+*/
+
+
+
+
+
 
 
 

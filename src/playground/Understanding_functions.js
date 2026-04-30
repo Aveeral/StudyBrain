@@ -325,7 +325,7 @@ const buildDocumentResponse = (user,doc,chunks) => {
 }
 }
 
-
+module.exports = {sanitizeText,ingestText};
 
 
 
