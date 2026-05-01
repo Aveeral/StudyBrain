@@ -1,10 +1,20 @@
-express = require("express");
+const express = require("express");
+const dotenv =  require("dotenv");
+
+dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.get("/",(req,res) => {
-    res.send(`Hello ${req.query.name} `);
-})
+app.use(express.json());
 
-app.listen(PORT,() => {console.log("STUDY BRAIN IS NOW RUNNING")})
+app.get("/health", (req, res) => {
+  res.json({ 
+    status: "ok",
+    message: "StudyBrain is running"
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`StudyBrain server running on port ${PORT}`);
+}); 
