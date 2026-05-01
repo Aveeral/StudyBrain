@@ -1,10 +1,12 @@
-{
+{ "type": "module",
   "name": "studybrain",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server/index.js",
+    "dev": "nodemon src/server/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/Aveeral/StudyBrain/issues"
   },
-  "homepage": "https://github.com/Aveeral/StudyBrain#readme"
+  "homepage": "https://github.com/Aveeral/StudyBrain#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
 }
