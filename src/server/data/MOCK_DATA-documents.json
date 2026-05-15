@@ -1,0 +1,12 @@
+[
+  { "id": 1, "courseId": 1, "userId": "a1b2c3", "name": "Lecture 1 Notes", "processingStatus": "completed", "processedAt": "2024-01-15T10:00:00Z", "createdAt": "2024-01-15T09:00:00Z" },
+  { "id": 2, "courseId": 1, "userId": "a1b2c3", "name": "Week 2 Slides", "processingStatus": "completed", "processedAt": "2024-01-16T10:00:00Z", "createdAt": "2024-01-16T09:00:00Z" },
+  { "id": 3, "courseId": 1, "userId": "a1b2c3", "name": "Assignment 1", "processingStatus": "pending", "processedAt": null, "createdAt": "2024-01-17T09:00:00Z" },
+  { "id": 4, "courseId": 2, "userId": "a1b2c3", "name": "Chapter 3 Summary", "processingStatus": "completed", "processedAt": "2024-01-18T10:00:00Z", "createdAt": "2024-01-18T09:00:00Z" },
+  { "id": 5, "courseId": 2, "userId": "a1b2c3", "name": "Midterm Notes", "processingStatus": "processing", "processedAt": null, "createdAt": "2024-01-19T09:00:00Z" },
+  { "id": 6, "courseId": 3, "userId": "a1b2c3", "name": "Recursion Lecture", "processingStatus": "completed", "processedAt": "2024-01-20T10:00:00Z", "createdAt": "2024-01-20T09:00:00Z" },
+  { "id": 7, "courseId": 3, "userId": "a1b2c3", "name": "Binary Trees Slides", "processingStatus": "failed", "processedAt": null, "createdAt": "2024-01-21T09:00:00Z" },
+  { "id": 8, "courseId": 4, "userId": "a1b2c3", "name": "Newton Laws Notes", "processingStatus": "completed", "processedAt": "2024-01-22T10:00:00Z", "createdAt": "2024-01-22T09:00:00Z" },
+  { "id": 9, "courseId": 4, "userId": "a1b2c3", "name": "Thermodynamics PDF", "processingStatus": "pending", "processedAt": null, "createdAt": "2024-01-23T09:00:00Z" },
+  { "id": 10, "courseId": 5, "userId": "a1b2c3", "name": "French Revolution Notes", "processingStatus": "completed", "processedAt": "2024-01-24T10:00:00Z", "createdAt": "2024-01-24T09:00:00Z" }
+]
