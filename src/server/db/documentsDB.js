@@ -5,8 +5,8 @@ async function findAll(course_id) {
       return rows;
 }
 
-async function findById(id) {
-      const {rows} = await pool.query("SELECT * FROM documents WHERE id=$1",[id]);
+async function findById(id,course_id) {
+      const {rows} = await pool.query("SELECT * FROM documents WHERE id=$1 AND course_id=$2",[id,course_id]);
       return rows[0];
 }
 
@@ -15,13 +15,13 @@ async function create(name,course_id){
     return rows[0];
 }
 
-async function update(name,id) {
-    const {rows} = await pool.query("UPDATE documents SET name = $1 WHERE id = $2 RETURNING *",[name,id]);
+async function update(name,id,course_id) {
+    const {rows} = await pool.query("UPDATE documents SET name = $1 WHERE id = $2 AND course_id = $3 RETURNING *",[name,id,course_id]);
     return rows[0];
 }
 
-async function remove(id){
-    const {rows} = await pool.query("DELETE FROM documents WHERE id = $1 RETURNING *",[id]);
+async function remove(id,course_id){
+    const {rows} = await pool.query("DELETE FROM documents WHERE id = $1 AND course_id = $2 RETURNING *",[id,course_id]);
     return rows[0];
 }
 

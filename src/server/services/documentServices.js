@@ -26,10 +26,10 @@ async function getAllDocs(course_id){
      return Docs;
 }
 
-async function getDocumentById(id){
-    const Doc = await db.findById(id);
+async function getDocumentById(id,course_id){
+    const Doc = await db.findById(id,course_id);
     if(!Doc){
-        const err = new Error(`Doc with id: ${id} does not exist!`);
+        const err = new Error(`Invalid Document or Course Id`);
         err.status = 404;
         throw err;
     }
@@ -45,21 +45,21 @@ async function createDoc(name,course_id){
   
 }
 
-async function updateDoc(name,id){
+async function updateDoc(name,id,course_id){
     validateDocumentName(name);
-    const updatedDoc = await db.update(name,id);
+    const updatedDoc = await db.update(name,id,course_id);
     if(!updatedDoc){
-        const err = new Error(`Doc with id: ${id} does not exist!`);
+        const err = new Error(`Invalid Document or Course Id`);
         err.status = 404;
         throw err;
     }
     return updatedDoc;
 }
 
-async function removeDoc(id){
-    const deleteDoc = await db.remove(id);
+async function removeDoc(id,course_id){
+    const deleteDoc = await db.remove(id,course_id);
     if(!deleteDoc){
-        const err = new Error(`Doc with id: ${id} does not exist!`);
+        const err = new Error(`Invalid Documnt or Course Id`);
         err.status = 404;
         throw err;
     }

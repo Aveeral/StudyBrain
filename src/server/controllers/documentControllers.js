@@ -13,7 +13,8 @@ async function getAll(req,res,next) {
 async function getById(req,res,next) {
     try{
         const id = req.params.id;
-        const doc = await documentServices.getDocumentById(id);
+        const course_id = req.params.course_id;
+        const doc = await documentServices.getDocumentById(id,course_id);
         res.status(200).json(doc);
 
     }catch(err){
@@ -35,7 +36,8 @@ async function update(req,res,next){
     try{
        const newName = req.body.newName;
        const id = req.params.id;
-       const updatedDoc = await documentServices.updateDoc(newName,id);
+       const course_id = req.params.course_id;
+       const updatedDoc = await documentServices.updateDoc(newName,id,course_id);
        res.status(200).json(updatedDoc);
     }catch(err){
         next(err);
@@ -44,7 +46,8 @@ async function update(req,res,next){
 async function remove(req,res,next){
       try{
         const id = req.params.id;
-        const deleteDoc = await documentServices.removeDoc(id);
+        const course_id = req.params.course_id;
+        const deleteDoc = await documentServices.removeDoc(id,course_id);
         res.status(200).json(deleteDoc);
       }catch(err){
         next(err);
