@@ -1,4 +1,4 @@
-const db = require("../db/courses.js");
+const db = require("../db/coursesDB.js");
 
 function validateCourseName(name){
     if(typeof name != "string"){

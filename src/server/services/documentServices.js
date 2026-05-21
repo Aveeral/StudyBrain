@@ -1,4 +1,4 @@
-const db = require('../db/documents.js');
+const db = require('../db/documentsDB.js');
 const coursesService = require('./coursesService');
 
 function validateDocumentName(name){
