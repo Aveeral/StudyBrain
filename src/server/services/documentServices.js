@@ -1,5 +1,5 @@
 const db = require('../db/documentsDB.js');
-const coursesService = require('./courseService');
+const coursesService = require('./courseServices');
 
 function validateDocumentName(name){
      if(typeof name != "string"){
