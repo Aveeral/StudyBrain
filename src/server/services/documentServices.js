@@ -2,19 +2,24 @@ const db = require('../db/documentsDB.js');
 const coursesService = require('./courseServices');
 
 function validateDocumentName(name){
+   
      if(typeof name != "string"){
         const err = new Error("Incorrect Datatype of name!");
+        err.status = 400;
         throw err;
     }
+    name = name.trim();
    const size = name.length;
    if(size<3 || size>200){
        const err = new Error("Length of name must be between 3 to 200 characters!");
+       err.status = 400;
        throw err;
     }
    
    const ending = (name.endsWith(".pdf") || name.endsWith(".txt"));
    if (!ending) {
         const err = new Error("System only supports pdf or .txt files for now!");
+        err.status(400);
         throw err;
    }
    return true;
