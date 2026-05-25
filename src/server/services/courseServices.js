@@ -34,8 +34,8 @@ async function getCourseById(id){
 }
 
 async function createCourse(name){
-
         validateCourseName(name);
+        name = name.trim();
         const newCourse = await db.create(name);
         return newCourse;
   
@@ -43,6 +43,7 @@ async function createCourse(name){
 
 async function updateCourse(name,id){
     validateCourseName(name);
+    name = name.trim();
     const updatedCourse = await db.update(name,id);
     if(!updatedCourse){
         const err = new Error(`Course with id: ${id} does not exist!`);

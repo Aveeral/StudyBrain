@@ -19,7 +19,7 @@ function validateDocumentName(name){
    const ending = (name.endsWith(".pdf") || name.endsWith(".txt"));
    if (!ending) {
         const err = new Error("System only supports pdf or .txt files for now!");
-        err.status(400);
+        err.status = 400;
         throw err;
    }
    return true;
@@ -44,6 +44,7 @@ async function getDocumentById(id,course_id){
 async function createDoc(name,course_id){
 
         validateDocumentName(name);
+        name = name.trim();
         await coursesService.getCourseById(course_id);
         const newDoc = await db.create(name,course_id);
         return newDoc;
@@ -52,6 +53,7 @@ async function createDoc(name,course_id){
 
 async function updateDoc(name,id,course_id){
     validateDocumentName(name);
+    name = name.trim();
     const updatedDoc = await db.update(name,id,course_id);
     if(!updatedDoc){
         const err = new Error(`Invalid Document or Course Id`);
