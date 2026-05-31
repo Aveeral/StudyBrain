@@ -18,13 +18,13 @@ function validateCourseName(name){
 }
 
 
-async function getAllCourses(){
-     const courses = await db.findAll();
+async function getAllCourses(user_id){
+     const courses = await db.findAll(user_id);
      return courses;
 }
 
-async function getCourseById(id){
-    const course = await db.findById(id);
+async function getCourseById(id,user_id){
+    const course = await db.findById(id,user_id);
     if(!course){
         const err = new Error(`Course with id: ${id} does not exist!`);
         err.status = 404;
@@ -33,18 +33,18 @@ async function getCourseById(id){
     return course;
 }
 
-async function createCourse(name){
+async function createCourse(name,user_id){
         validateCourseName(name);
         name = name.trim();
-        const newCourse = await db.create(name);
+        const newCourse = await db.create(name,user_id);
         return newCourse;
   
 }
 
-async function updateCourse(name,id){
+async function updateCourse(name,id,user_id){
     validateCourseName(name);
     name = name.trim();
-    const updatedCourse = await db.update(name,id);
+    const updatedCourse = await db.update(name,id,user_id);
     if(!updatedCourse){
         const err = new Error(`Course with id: ${id} does not exist!`);
         err.status = 404;
@@ -53,8 +53,8 @@ async function updateCourse(name,id){
     return updatedCourse;
 }
 
-async function removeCourse(id){
-    const deleteCourse = await db.remove(id);
+async function removeCourse(id,user_id){
+    const deleteCourse = await db.remove(id,user_id);
     if(!deleteCourse){
         const err = new Error(`Course with id: ${id} does not exist!`);
         err.status = 404;
