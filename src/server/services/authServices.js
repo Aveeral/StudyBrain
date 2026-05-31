@@ -4,6 +4,19 @@ const jwt = require("jsonwebtoken");
 
 async function register(display_name,email,password){
 
+   if(!email.trim()){
+      const err = new Error("Please enter email");
+      err.status = 400;
+      throw err;
+   }
+   
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   if(!emailRegex.test(email)){
+      const err = new Error("Please enter valid email!");
+      err.status = 400;
+      throw err;
+   } 
+
    const verifyPassword = password.trim();
    if(!verifyPassword){
     const err = new Error("Please enter Password!");
