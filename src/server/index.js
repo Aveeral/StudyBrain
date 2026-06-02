@@ -13,17 +13,18 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use("/auth",authRoutes);
-app.use(authMiddleware);
-  
-app.use("/courses",courseRoutes)
-app.use("/courses",documentRoutes);
-
 app.get("/health", (req, res) => {
   res.json({ 
     status: "ok",
     message: "StudyBrain is running"
   });
 });
+app.use(authMiddleware);
+  
+app.use("/courses",courseRoutes)
+app.use("/courses",documentRoutes);
+
+
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;

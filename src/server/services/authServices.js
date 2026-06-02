@@ -3,6 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 async function register(display_name,email,password){
+   if ((typeof email !== "string") || (typeof password !== "string")) {
+      const err = new Error("Incorrect Datatype");
+      err.status = 400;
+      throw err;
+   }
 
    if(!email.trim()){
       const err = new Error("Please enter email");
@@ -17,8 +22,8 @@ async function register(display_name,email,password){
       throw err;
    } 
 
-   const verifyPassword = password.trim();
-   if(!verifyPassword){
+   
+   if(!password.trim()){
     const err = new Error("Please enter Password!");
     err.status = 400;
     throw err;
@@ -45,6 +50,25 @@ async function register(display_name,email,password){
 }
 
 async function login(email,password){
+
+   if ((typeof email !== "string") || (typeof password !== "string")) {
+      const err = new Error("Incorrect Datatype");
+      err.status = 400;
+      throw err;
+   }
+
+   if(!email.trim()){
+      const err = new Error("Please enter email");
+      err.status = 400;
+      throw err;
+   }
+   
+   if(!password.trim()){
+    const err = new Error("Please enter Password!");
+    err.status = 400;
+    throw err;
+   }
+
 
    const isExistingUser = await db.getUserByEmail(email);
    if(!isExistingUser){
