@@ -25,13 +25,14 @@ function validateDocumentName(name){
    return true;
 }
 
-async function getAllDocs(course_id){
-    await coursesService.getCourseById(course_id);
+async function getAllDocs(course_id,user_id){
+    await coursesService.getCourseById(course_id,user_id);
      const Docs = await db.findAll(course_id);
      return Docs;
 }
 
-async function getDocumentById(id,course_id){
+async function getDocumentById(id,course_id,user_id){
+    await coursesService.getCourseById(course_id,user_id);
     const Doc = await db.findById(id,course_id);
     if(!Doc){
         const err = new Error(`Invalid Document or Course Id`);
@@ -41,17 +42,17 @@ async function getDocumentById(id,course_id){
     return Doc;
 }
 
-async function createDoc(name,course_id){
-
+async function createDoc(name,course_id,user_id){
         validateDocumentName(name);
         name = name.trim();
-        await coursesService.getCourseById(course_id);
+        await coursesService.getCourseById(course_id,user_id);
         const newDoc = await db.create(name,course_id);
         return newDoc;
   
 }
 
-async function updateDoc(name,id,course_id){
+async function updateDoc(name,id,course_id,user_id){
+    await coursesService.getCourseById(course_id,user_id);
     validateDocumentName(name);
     name = name.trim();
     const updatedDoc = await db.update(name,id,course_id);
@@ -63,7 +64,8 @@ async function updateDoc(name,id,course_id){
     return updatedDoc;
 }
 
-async function removeDoc(id,course_id){
+async function removeDoc(id,course_id,user_id){
+    await coursesService.getCourseById(course_id,user_id);
     const deleteDoc = await db.remove(id,course_id);
     if(!deleteDoc){
         const err = new Error(`Invalid Documnt or Course Id`);
