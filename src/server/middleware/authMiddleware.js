@@ -8,10 +8,24 @@
       err.status = 401;
       throw err;
     }
-    const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token,process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
+    const check = authHeader.split(" ");
+    if(check.length !== 2 || check[0] !== "Bearer"){
+      const err = new Error("Invalid authHeader");
+      err.status = 400;
+      throw err;
+    }
+    const token = check[1];
+
+    try{
+      const decoded = jwt.verify(token,process.env.JWT_SECRET);
+      req.user = decoded;
+      next();
+    }catch{
+        const err = new Error("Invalid or expired token");
+        err.status = 401;
+        throw err;
+    }
+
 
   }catch(err){
      next(err);
