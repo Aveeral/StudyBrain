@@ -1,10 +1,11 @@
 const express = require("express");
 const controller = require("../controllers/documentControllers.js");
 const router = express.Router();
+const upload = require("..middleware/uploadMiddleware.js")
 
 router.route("/:course_id/documents")
 .get(controller.getAll)
-.post(controller.create)
+.post(upload.single('file'),controller.create)
 
 
 router.route("/:course_id/documents/:id")

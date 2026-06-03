@@ -26,9 +26,10 @@ async function getById(req,res,next) {
 async function create(req,res,next){
     try {
         const name = req.body.name;
+        const file = req.file;
         const course_id = req.params.course_id;
         const user_id = req.user.userId;
-        const newDoc = await documentServices.createDoc(name,course_id,user_id);
+        const newDoc = await documentServices.createDoc(name,course_id,user_id,file);
         res.status(201).json(newDoc);
 
     } catch (err) {
