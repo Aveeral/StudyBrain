@@ -10,8 +10,8 @@ async function findById(id,course_id) {
       return rows[0];
 }
 
-async function create(name,course_id){
-    const {rows} =  await pool.query("INSERT INTO documents(name,course_id) VALUES($1,$2) RETURNING *",[name,course_id]);
+async function create(name,course_id,file_url){
+    const {rows} =  await pool.query("INSERT INTO documents(name,course_id,file_url) VALUES($1,$2,$3) RETURNING *",[name,course_id,file_url]);
     return rows[0];
 }
 
