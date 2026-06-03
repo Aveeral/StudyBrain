@@ -1,3 +1,4 @@
+const supabase = require('../db/supabaseClient');
 const db = require('../db/documentsDB.js');
 const coursesService = require('./courseServices');
 
@@ -42,13 +43,18 @@ async function getDocumentById(id,course_id,user_id){
     return Doc;
 }
 
-async function createDoc(name,course_id,user_id){
+async function createDoc(name,course_id,user_id,file){
         validateDocumentName(name);
         name = name.trim();
         await coursesService.getCourseById(course_id,user_id);
-        const newDoc = await db.create(name,course_id);
-        return newDoc;
-  
+       
+        const filePath = user_id + "/"+ course_id + "/" + Date.now() + "-" + file.originalname;
+        const {error} = await supabase.storage.from('documents').upload(filePath,file.buffer,{contentType: file.mimetype});
+        if(error) throw error;
+        const {data} = supabase.storage.from('documents').getPublicUrl(filePath);
+        const newDoc = await db.create(name,course_id,data.publicUrl);
+        return newDoc; 
+        
 }
 
 async function updateDoc(name,id,course_id,user_id){
