@@ -17,12 +17,6 @@ function validateDocumentName(name){
        throw err;
     }
    
-   const ending = (name.endsWith(".pdf") || name.endsWith(".txt"));
-   if (!ending) {
-        const err = new Error("System only supports pdf or .txt files for now!");
-        err.status = 400;
-        throw err;
-   }
    return true;
 }
 
