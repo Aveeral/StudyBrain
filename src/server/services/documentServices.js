@@ -1,6 +1,10 @@
 const supabase = require('../db/supabaseClient');
 const db = require('../db/documentsDB.js');
 const coursesService = require('./courseServices');
+const extractText = require("./extractionService.js");
+const chunkText = require("./chunkingService.js");
+const generateEmbeddings = require("./embeddingService.js");
+const insertChunks = require("../db/ingestionDB.js");
 
 function validateDocumentName(name){
    
@@ -47,6 +51,10 @@ async function createDoc(name,course_id,user_id,file){
         if(error) throw error;
         const {data} = supabase.storage.from('documents').getPublicUrl(filePath);
         const newDoc = await db.create(name,course_id,data.publicUrl);
+        const text = await extractText(file);
+        const chunks = await chunkText(text);
+        const chunkObjects = await generateEmbeddings(chunks);
+        await insertChunks(chunkObjects,newDoc.id,user_id,course_id);
         return newDoc; 
         
 }
