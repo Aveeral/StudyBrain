@@ -1,13 +1,19 @@
-const extractTextPDF = require("pdf-parse");
-async function extractText(file){
-    if(file.mimetype == 'application/pdf'){
-        const content = await extractTextPDF(file.buffer);
-        return content.text;
+const { PdfReader } = require("pdfreader");
+
+async function extractText(file) {
+    if (file.mimetype === 'application/pdf') {
+        return new Promise((resolve, reject) => {
+            let text = '';
+            new PdfReader().parseBuffer(file.buffer, (err, item) => {
+                if (err) return reject(err);
+                if (!item) return resolve(text);
+                if (item.text) text += item.text + ' ';
+            });
+        });
     }
-    if(file.mimetype == 'text/plain'){
-        const content = file.buffer;
-        return content.toString();
-    }   
+    if (file.mimetype === 'text/plain') {
+        return file.buffer.toString();
+    }
 }
 
 module.exports = extractText;
