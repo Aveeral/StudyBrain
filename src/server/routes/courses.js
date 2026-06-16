@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/courseControllers');
-const answersController = require('../controllers/answersController');
+const getAnswer = require('../controllers/answersController');
 
 router.route('/')
   .get(controller.getAll)
@@ -12,6 +12,6 @@ router.route('/:id')
   .patch(controller.update)
   .delete(controller.remove)
 
-router.post('/:courseId/ask',answersController.getAnswer);
+router.post('/:courseId/ask',getAnswer);
 
 module.exports = router;

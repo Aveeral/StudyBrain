@@ -1,4 +1,4 @@
-const buildAnswer = require("./answerService.js");
+const buildAnswer = require("../services/answerService.js");
 
 async function getAnswer(req,res,next){
     try{
