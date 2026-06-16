@@ -22,6 +22,7 @@ function buildPrompt(question,chunks){
 
     `;
     const Prompt = {systemPrompt,userPrompt};
+    console.log(Prompt);
     return Prompt;
 }
 

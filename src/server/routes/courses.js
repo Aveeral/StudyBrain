@@ -12,6 +12,6 @@ router.route('/:id')
   .patch(controller.update)
   .delete(controller.remove)
 
-router.post('/:courseId/ask',getAnswer);
+router.post('/:course_id/ask',getAnswer);
 
 module.exports = router;
