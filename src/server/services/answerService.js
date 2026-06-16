@@ -18,4 +18,4 @@ async function buildAnswer(question,course_id,user_id){
     return response.choices[0].message.content;
 }
 
-module.exports = buildAnswer;
+module.exports = buildAnswer; 
